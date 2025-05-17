@@ -1,29 +1,62 @@
-import React from 'react';
+import { useState } from 'react'
+import { SearchFilled } from '@fluentui/react-icons';
 import { useEffect } from 'react';
-import './App.css';
+import './styles/App.css'
+
+function search(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  const formData = new FormData(event.currentTarget);
+  const q = formData.get('q') as string;
+
+  if (q) {
+    window.location.href = `https://example.com/search?q=${encodeURIComponent(q)}`;
+  }
+}
+
 
 function App() {
+
   useEffect(() => {
     document.title = 'TUIT Bullet';
   }, []);
 
   return (
-    <div id='app'>
-      <div className='flex items-center gap-4 mt-[20px] ml-[20px] mr-[20px]'>
-        <img src="https://picsum.photos/1000" alt="Logo" className='w-[100px] h-[100px] rounded-[50px]'/>
-        <p className='text-[#373C74] text-[25px] font-bold font-[Segoe_UI]'>
-          Bulletin of TUIT: Management and <br /> Communication Technologies
-        </p>
-
-        <div className='ml-auto flex gap-4'>
-          <a href="/send-paper" className='text-[#373C74] text-[20px] font-bold font-[Segoe_UI]'>SEND PAPER</a>
-          <a href="/sign" className='text-[#373C74] text-[20px] font-bold font-[Segoe_UI]'>SIGN IN / SIGN OUT</a>
+    <>
+        <div className='header'>
+          <img src="https://picsum.photos/100" alt="Logo" />
+          <h1>Bulletin of TUIT: Management and <br /> Communication Technologies</h1>
+          <div className='header-right'>
+            <a href="/sendpaper">SEND PAPER</a>
+            <a href="/sign-in">SIGN IN / SIGN OUT</a>
+          </div>
         </div>
+        <div className='header-line'></div>
+        
+        <div className='links'>
+        <div className='links-left'>
+            <a href="/">Main</a>
+            <a href="/publications">Publications</a>
+            <a href="/papers">Papers</a>
+            <a href="/requirements">Requirements</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contacts">Contacts</a>
+        </div>
+          <div className='search'>
+            <form onSubmit={search}>
+              <input type="text" className='searchinput' name="q" placeholder='search'/>
+              <button type="submit" className='searchbutton'>
+                <SearchFilled />
+              </button>
+            </form>
+          </div>
       </div>
 
-      <div className='w-[100%] h-[3px] bg-[#D2CDCD] mt-[20px]'></div>
-    </div>
-  );
+      <div className='header-line'></div>
+
+      <div className='content'></div>
+    </>
+  )
 }
 
-export default App;
+export default App
