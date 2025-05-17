@@ -8,7 +8,7 @@ function NotFound() {
     }, []);
 
     return (
-        <div>
+        <div className="notfoundmaindiv">
             <h1>404</h1>
             <h2>Not found</h2>
         </div>

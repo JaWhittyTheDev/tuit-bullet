@@ -54,7 +54,15 @@ function App() {
 
       <div className='header-line'></div>
 
-      <div className='content'></div>
+      <div className='content'>
+        <div className='mainmenu-lastedition-line'></div>
+        <p className='mainmenu-lastedition'>LAST EDITION</p>
+        <div className='mainmenu-block-1'>
+          <img src="https://picsum.photos/210/297" alt="Image" />
+          <p>Lorem ipsum dolor, sit amet consectetur <br></br> adipisicing elit. Quasi, iste voluptatum quam <br /> eos quis maxime nisi expedita cupiditate <br /> omnis dicta ad quo, deserunt porro <br /> doloremque, similique dolorum nostrum. <br /> Magnam rem sunt amet iusto ipsam, dolores <br /> necessitatibus.</p>
+          <button>MORE</button>
+        </div>
+      </div>
     </>
   )
 }
