@@ -1,6 +1,7 @@
-import { useState } from 'react'
 import { SearchFilled } from '@fluentui/react-icons';
 import { useEffect } from 'react';
+import { RiTelegram2Fill } from "react-icons/ri";
+import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import './styles/App.css'
 
 function search(event: React.FormEvent<HTMLFormElement>) {
@@ -10,7 +11,7 @@ function search(event: React.FormEvent<HTMLFormElement>) {
   const q = formData.get('q') as string;
 
   if (q) {
-    window.location.href = `https://example.com/search?q=${encodeURIComponent(q)}`;
+    window.location.href = `https://tuit.com/search?q=${encodeURIComponent(q)}`;
   }
 }
 
@@ -60,8 +61,86 @@ function App() {
         <div className='mainmenu-block-1'>
           <img src="https://picsum.photos/210/297" alt="Image" />
           <p>Lorem ipsum dolor, sit amet consectetur <br></br> adipisicing elit. Quasi, iste voluptatum quam <br /> eos quis maxime nisi expedita cupiditate <br /> omnis dicta ad quo, deserunt porro <br /> doloremque, similique dolorum nostrum. <br /> Magnam rem sunt amet iusto ipsam, dolores <br /> necessitatibus.</p>
-          <button>MORE</button>
+          <button onClick={() => window.location.href = "https://tuit.uz/lastedition"}>MORE</button>
         </div>
+
+        <div className='mainmenu-mostread-line'></div>
+        <p className='mainmenu-mostread'>MOST READ PAPERS</p>
+          <div className='mainmenu-mostread-block'>
+            <div className='mainmenu-mostread-inblock'>
+              <div className='mainmenu-mostread-posts'>
+                <div className='mainmenu-mostread-post'><p className='mainmenu-mostread-post-heading'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, rem.</p> <p className='mainmenu-mostread-post-content'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illum earum porro quis perferendis, doloribus velit aut et molestiae aspernatur, dolores accusamus corrupti deleniti!</p></div>
+                <hr />
+                <div className='mainmenu-mostread-post'><p className='mainmenu-mostread-post-heading'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, rem.</p> <p className='mainmenu-mostread-post-content'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illum earum porro quis perferendis, doloribus velit aut et molestiae aspernatur, dolores accusamus corrupti deleniti!</p></div>
+                <hr />
+                <div className='mainmenu-mostread-post'><p className='mainmenu-mostread-post-heading'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, rem.</p> <p className='mainmenu-mostread-post-content'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illum earum porro quis perferendis, doloribus velit aut et molestiae aspernatur, dolores accusamus corrupti deleniti!</p></div>
+                <hr />
+                <div className='mainmenu-mostread-post'><p className='mainmenu-mostread-post-heading'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, rem.</p> <p className='mainmenu-mostread-post-content'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illum earum porro quis perferendis, doloribus velit aut et molestiae aspernatur, dolores accusamus corrupti deleniti!</p></div>
+                <hr />
+                <div className='mainmenu-mostread-post'><p className='mainmenu-mostread-post-heading'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium, rem.</p> <p className='mainmenu-mostread-post-content'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate illum earum porro quis perferendis, doloribus velit aut et molestiae aspernatur, dolores accusamus corrupti deleniti!</p></div>
+              </div>
+              <hr />
+              <div className='mainmenu-mostread-more'><a href="/mostread" className='mainmenu-mostread-more'>MORE</a></div>
+            </div>
+          </div>
+
+          <div className='mainmenu-lastpaper-line'></div>
+        <p className='mainmenu-lastpaper'>LAST PAPER</p>
+        <div className='mainmenu-lastpaper-blocks'>
+          <div className='mainmenu-lastpaper-block'>
+            <a href="/categories/computers">COMPUTERS</a>
+            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officia minima cupiditate odit fugiat? Laborum laboriosam unde culpa sed a?</p>
+            <button>MORE</button>
+          </div>
+          <div className='mainmenu-lastpaper-block'>
+            <a href="/categories/computers">COMPUTERS</a>
+            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officia minima cupiditate odit fugiat? Laborum laboriosam unde culpa sed a?</p>
+            <button>MORE</button>
+          </div>
+          <div className='mainmenu-lastpaper-blockright'>
+            <a href="/categories/computers">COMPUTERS</a>
+            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officia minima cupiditate odit fugiat? Laborum laboriosam unde culpa sed a?</p>
+            <button>MORE</button>
+          </div>
+          <div className='mainmenu-lastpaper-blockright'>
+            <a href="/categories/computers">COMPUTERS</a>
+            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga officia minima cupiditate odit fugiat? Laborum laboriosam unde culpa sed a?</p>
+            <button>MORE</button>
+          </div>
+          <a href="/lastpaper" className='mainmenu-lastpaper-more'>MORE</a>
+        </div>
+
+          <div className='footer'>
+            <div className='footer-links'>
+              <div className="footer-links-left">
+                <h1>MENU</h1>
+                <div><a href="/publications">Publications</a></div>
+                <div><a href="/papers">Papers</a></div>
+                <div><a href="/requirements">Requirements</a></div>
+                <div><a href="/faq">FAQ</a></div>
+                <div><a href="/contacts">Contacts</a></div>
+              </div>
+              <div className="footer-links-right">
+                <h1>ADRESS</h1>
+                <p>Tashkent, Amir Temur street, <br /> 108 building</p>
+                <h1>SOCIAL MEDIA</h1> 
+                <div className='footer-icons'>
+                  <a href="https://t.me/@tuit"><RiTelegram2Fill className='footer-icon'/></a>
+                  <a href="https://facebook.com/tuit"><FaFacebookSquare className='footer-icon'/></a>
+                  <a href="https://instagram.com/tuit"><FaInstagram className='footer-icon'/></a>
+                </div>
+              </div>
+            </div>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.3672880048543!2d69.57199217476885!3d41.474636371288945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aefcaa62ce469b%3A0x5b967b77a7db66c7!2z0YPQu9C40YbQsCDQkNC80LjRgNCwINCi0LXQvNGD0YDQsCAxMDgsIDExMTYwNiwg0KfQuNGA0YfQuNC6LCDQotCw0YjQutC10L3RgtGB0LrQsNGPINC-0LHQu9Cw0YHRgtGMLCDQo9C30LHQtdC60LjRgdGC0LDQvQ!5e0!3m2!1sru!2s!4v1747588578706!5m2!1sru!2s" width="600" height="450" loading="lazy" className='footer-maps'></iframe>
+            <div className='footer-footer'>
+              <p>© 2021 Bulletin of TUIT: Management and Communication Technologies | All rights reserved!</p>
+            </div>
+          </div>
       </div>
     </>
   )
