@@ -3,18 +3,7 @@ import { useEffect } from 'react';
 import { RiTelegram2Fill } from "react-icons/ri";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import './styles/App.css'
-
-function search(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault();
-
-  const formData = new FormData(event.currentTarget);
-  const q = formData.get('q') as string;
-
-  if (q) {
-    window.location.href = `https://tuit.com/search?q=${encodeURIComponent(q)}`;
-  }
-}
-
+import { search} from './utils/BasicFunctions';
 
 function App() {
 

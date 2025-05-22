@@ -358,7 +358,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1200px;
+  margin-top: 800px;
 }
 
 .footer-links {
@@ -425,4 +425,5 @@
   height: 50px;
   background-color: #24374A;
   transform: translateY(-111px);
+  width: 100%;
 }

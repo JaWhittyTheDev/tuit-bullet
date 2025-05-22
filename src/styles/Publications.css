@@ -1,0 +1,11 @@
+.publications-line {
+    margin-left: 20px;
+    width: 225px;
+    height: 5px;
+    background-color: #373C74;
+}
+
+.publications {
+    margin-left: 20px;
+    color: #373C74;
+}
