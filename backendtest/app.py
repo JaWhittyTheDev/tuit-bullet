@@ -1,8 +1,10 @@
+# Этот бэкенд сервер только для теста!
+
 from flask import Flask, jsonify
-from flask_cors import CORS  # импортируем
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # разрешаем запросы с любого источника (для разработки)
+CORS(app)
 
 @app.route('/api/latest-publication')
 def latest_publication():
