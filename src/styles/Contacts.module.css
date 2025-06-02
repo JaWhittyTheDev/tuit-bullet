@@ -1,0 +1,104 @@
+.contactsline {
+    margin-left: 500px;
+    background-color: #373c74;
+    width: 165px;
+    height: 4px;
+}
+
+.contactstitle {
+    margin-left: 500px;
+    margin-top: 0px;
+    color: #373c74;
+}
+
+.contactsbox {
+    margin-left: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f7fb;
+    width: 1000px;
+    height: 500px;
+    border-radius: 20px;
+}
+
+.contactsinbox {
+    display: flex;
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    border-left: 30px solid #36516d;
+    border-radius: 20px;
+}
+
+.contactsinbox form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactsinbox form input {
+    box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    border: none;
+    width: 500px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 18px;
+    font-style: italic;
+    border-radius: 20px;
+}
+
+.contactsinbox form textarea {
+    box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    resize: none;
+    width: 500px;
+    height: 200px;
+    margin-left: 20px;
+    margin-top: 20px;
+    border: none;
+    font-size: 18px;
+    font-style: italic;
+    border-radius: 10px;
+}
+
+.contactsbox form button {
+    transition: 0.3s;
+    background-color: #373c74;
+    color: white;
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+}
+
+.contactsbox form button:hover {
+    background-color: white;
+    color: #373c74;
+}
+
+.contactsinfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.contactsinfo p {
+    margin-top: -10px;
+    color: #36516d;
+    font-size: 20px;
+}
+
+.contactsinfo h3 {
+    font-weight: 600;
+    color: #36516d;
+}

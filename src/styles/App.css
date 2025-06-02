@@ -1,5 +1,14 @@
 #root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input {
+  font-style: italic;
 }
 
 .header {
@@ -7,7 +16,6 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -54,29 +62,28 @@
 .search {
   width: 250px;
   height: 40px;
-  border: 1px solid #373C74;
+  border: 2px solid #373C74;
   background-color: #F6F7FB;
   display: flex;
   align-items: center;
   padding: 0 5px;
   box-sizing: border-box;
   margin-right: 20px;
+  border-radius: 20px;
 }
 
 .searchinput {
-  height: 35px;
+  height: 37px;
   width: 200px;
   border: none;
   background-color: #F6F7FB;
   padding-left: 10px;
   box-sizing: border-box;
-  transform: translate(-5px, 14px);
-}
-
-.searchinput::placeholder {
+  transform: translate(-25px, 21px);
   font-size: 20px;
   font-style: italic;
   color: #373C74;
+  border-radius: 20px;
 }
 
 .searchbuttonbox {
@@ -87,10 +94,10 @@
 .searchbutton {
   background-color: transparent;
   border: none;
-  width: 40px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
   cursor: pointer;
-  transform: translate(200px, -15px);
+  transform: translate(180px, -18px);
 }
 
 .searchbutton svg {
@@ -103,7 +110,7 @@
   height: 3px;
   width: 100%;
   background-color: #D2CDCD;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
 .mainmenu-lastedition-line {
@@ -116,7 +123,7 @@
 .mainmenu-lastedition {
   font-size: 30px;
   margin-left: 350px;
-  margin-top: 20px;
+  margin-top: 0px;
   color: #373C74;
   font-weight: bold;
 }
@@ -128,21 +135,37 @@
   height: 300px;
   background-color: #F6F7FB;
   border-radius: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .mainmenu-block-1 img {
   width: 180px;
   height: 250px;
   transform: translate(20px, 20px);
+  display: block;
 }
 
 .mainmenu-block-1 p {
-  transform: translate(220px, -260px);
+  position: absolute;
+  top: 20px;
+  left: 220px;
+  width: 420px;
   font-size: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  margin: 0;
 }
 
 .mainmenu-block-1 button {
-  transition: 0.3s;
+  position: absolute;
+  top: 230px;
+  left: 200px;
   width: 200px;
   height: 40px;
   background-color: #373C74;
@@ -150,9 +173,9 @@
   font-size: 20px;
   font-weight: bold;
   border: none;
-  transform: translate(220px, -233px);
   cursor: pointer;
   border-radius: 10px;
+  transition: width 0.3s ease;
 }
 
 .mainmenu-block-1 button:hover {
@@ -162,7 +185,7 @@
 .mainmenu-mostread {
   font-size: 30px;
   margin-left: 1250px;
-  margin-top: 20px;
+  margin-top: 0px;
   color: #373C74;
   font-weight: bold;
 }
@@ -170,7 +193,7 @@
 .mainmenu-mostread-line {
   width: 288px;
   height: 4px;
-  margin-left: 1255px;
+  margin-left: 1250px;
   margin-top: -390px;
   background-color: #373C74;
 }
@@ -236,7 +259,7 @@
 .mainmenu-lastpaper {
   font-size: 30px;
   margin-left: 350px;
-  margin-top: -1230px;
+  margin-top: -1250px;
   color: #373C74;
   font-weight: bold;
 }
@@ -285,14 +308,21 @@
 }
 
 .mainmenu-lastpaper-block button {
+  transition: 0.3s;
   background-color: #373C74;
   color: white;
   border: none;
+  border-radius: 20px;
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 150px;
+  height: 40px;
   font-weight: bold;
+  font-size: 1.5rem;
   margin: 14px;
+}
+
+.mainmenu-lastpaper-block button:hover {
+  transform: scale(1.1);
 }
 
 .mainmenu-lastpaper-blockright {
@@ -331,14 +361,21 @@
 }
 
 .mainmenu-lastpaper-blockright button {
+  border-radius: 20px;
+  transition: 0.3s;
   background-color: #373C74;
   color: white;
   border: none;
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 150px;
+  height: 40px;
   font-weight: bold;
+  font-size: 1.5rem;
   margin: 14px;
+}
+
+.mainmenu-lastpaper-blockright button:hover {
+  transform: scale(1.1);
 }
 
 .mainmenu-lastpaper-more {
@@ -402,11 +439,7 @@
 }
 
 .footer-maps {
-  position: relative;
-  left: 600px; 
-  top: -140px; 
-  width: 600px;
-  height: 250px;
+  display: none;
 }
 
 .footer-icons {
@@ -426,4 +459,5 @@
   background-color: #24374A;
   transform: translateY(-111px);
   width: 100%;
+  margin-top: 190px;
 }

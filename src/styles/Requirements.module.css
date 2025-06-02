@@ -1,0 +1,87 @@
+.requirements-line {
+    margin-left: 500px;
+    background-color: #373C74;
+    width: 228px;
+    height: 4px;
+}
+
+.requirements-title {
+    margin-top: 0px;
+    margin-left: 500px;
+    color: #373C74;
+    font-size: 30px;
+}
+
+.requirements-box {
+    margin-left: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #f6f7fb;
+    width: 1000px;
+    height: 1000px;
+}
+
+.requirements-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    width: 250px;
+    height: 90%;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 50px;
+}
+
+.requirements-list input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.requirements-list p {
+    color: #36516D;
+    font-weight: 750;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.requirements-list label {
+    color: #373c74;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.requirements-list input:checked + label {
+    text-decoration: underline;
+    color: #545BA8;
+}
+
+.requirements-content {
+    border-left: 20px solid #373C74;
+    box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(0,0,0,0.85);
+    background-color: white;
+    margin-left: 20px;
+    height: 90%;
+    width: 600px;
+    border-radius: 20px;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.requirements-content .title {
+    margin-left: 20px;
+    color: #36516D;
+    font-weight: bold;
+}
+
+.requirements-content p {
+    margin-left: 20px;
+}

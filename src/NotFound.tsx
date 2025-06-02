@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from 'react';
-import "./styles/NotFound.css"
+import styles from "./styles/NotFound.module.css"
 
 function NotFound() {
     useEffect(() => {
@@ -8,9 +8,9 @@ function NotFound() {
     }, []);
 
     return (
-        <div className="notfoundmaindiv">
-            <h1>404</h1>
-            <h2>Not found</h2>
+        <div style={{textAlign: 'center'}}>
+            <h1 className={styles.title}>404</h1>
+            <h2 className={styles.subtitle}>Not found</h2>
         </div>
     )
 }

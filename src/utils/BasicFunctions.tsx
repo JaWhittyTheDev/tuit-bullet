@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export function search(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
 
@@ -5,6 +7,20 @@ export function search(event: React.FormEvent<HTMLFormElement>) {
   const q = formData.get('q') as string;
 
   if (q) {
-    window.location.href = `https://tuit.com/search?q=${encodeURIComponent(q)}`;
+    ChangePage(`/search?q=${encodeURIComponent(q)}`);
   }
 }
+
+export function ChangePage(url: string) {
+  window.location.href = url;
+}
+
+export function ChangeTitle(title: string) {
+  useEffect(() => {
+          document.title = title;
+  }, []);
+}
+
+export function submitContacts(name: string, email: string, message: string): void {}
+
+export function submitRegistration(event: React.FormEvent<HTMLFormElement>) {event.preventDefault();}
