@@ -1,4 +1,4 @@
-import { search, ChangeTitle, submitContacts } from "./utils/BasicFunctions";
+import { search, ChangeTitle } from "./utils/BasicFunctions";
 import { SearchFilled } from "@fluentui/react-icons";
 import { RiTelegram2Fill } from "react-icons/ri";
 import { FaFacebookSquare } from "react-icons/fa";
@@ -48,7 +48,7 @@ function Contacts() {
                 <h1 className={styles.contactstitle}>CONTACTS</h1>
                 <div className={styles.contactsbox}>
                     <div className={styles.contactsinbox}>
-                        <form onSubmit={() => submitContacts("test", "test", "test")}>
+                        <form>
                             <input type="text" placeholder="First name"/>
                             <input type="email" placeholder="E-mail" />
                             <textarea placeholder="Message"></textarea>

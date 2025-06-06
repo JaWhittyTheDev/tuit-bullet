@@ -20,7 +20,3 @@ export function ChangeTitle(title: string) {
           document.title = title;
   }, []);
 }
-
-export function submitContacts(name: string, email: string, message: string): void {}
-
-export function submitRegistration(event: React.FormEvent<HTMLFormElement>) {event.preventDefault();}

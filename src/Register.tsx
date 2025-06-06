@@ -1,11 +1,20 @@
-import { search, ChangeTitle, submitRegistration } from "./utils/BasicFunctions";
+import { search, ChangeTitle } from "./utils/BasicFunctions";
 import styles from "./styles/Register.module.css";
 import { SearchFilled } from "@fluentui/react-icons";
 import { RiTelegram2Fill } from "react-icons/ri";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { useRef } from "react";
 
 function Register() {
+    const photoUploadRef = useRef<HTMLInputElement>(null)
+
+    function uploadPhoto() {
+        if (photoUploadRef.current) {
+            photoUploadRef.current.click()
+        }
+    }
+
     ChangeTitle("TUIT Bullet - Registration")
     return (
         <>
@@ -43,23 +52,24 @@ function Register() {
             <div className="content">
                 <div className={styles.registrationline}></div>
                 <h1 className={styles.registrationtitle}>REGISTRATION</h1>
-                <form onSubmit={submitRegistration} className={styles.registrationform}>
+                <form className={styles.registrationform}>
                     <div className={styles.registrationcolumn1}>
-                        <input type="text" placeholder="First name" />
-                        <input type="text" placeholder="Last name" />
-                        <input type="date" />
-                        <input type="email" placeholder="E-mail" />
-                        <input type="text" placeholder="Organization"/>
+                        <input type="text" placeholder="First name" required/>
+                        <input type="text" placeholder="Last name" required/>
+                        <input type="date" required/>
+                        <input type="email" placeholder="E-mail" required/>
+                        <input type="text" placeholder="Organization" required/>
+                        <button type="submit">SEND</button>
                     </div>
                     <div className={styles.registrationcolumn2}>
-                        <input type="text" placeholder="Login" />
-                        <input type="password" placeholder="Password" />
-                        <input type="password" placeholder="Password confirmation" />
-                        <input type="text" placeholder="Scientific degree" />
-                        <input type="text" placeholder="Another Information" />
+                        <input type="text" placeholder="Login" required/>
+                        <input type="password" placeholder="Password" required/>
+                        <input type="password" placeholder="Password confirmation" required/>
+                        <input type="text" placeholder="Scientific degree" required/>
+                        <input type="text" placeholder="Another Information" required/>
                     </div>
-                    <input type="file" style={{display: "none"}} accept=".jpg, .jpeg, .png, .avif, .bmp, .webp"/>
-                    <div className={styles.registrationuploadphoto}>
+                    <input type="file" style={{display: "none"}} accept=".jpg, .jpeg, .png, .avif, .bmp, .webp" ref={photoUploadRef}/>
+                    <div className={styles.registrationuploadphoto} onClick={uploadPhoto}>
                         <p>Add photo</p>
                         <h3>+</h3>
                     </div>
