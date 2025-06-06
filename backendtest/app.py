@@ -9,7 +9,7 @@ CORS(app)
 def latest_publication():
     data = {
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis sed tortor vitae scelerisque. Nulla vitae orci vitae massa bibendum cursus...",
-        "thubnail_url": "https://picsum.photo/210/297"
+        "thubnail_url": "https://placehold.co/210x297.png"
     }
     return jsonify(data)
 
