@@ -1,153 +1,140 @@
 import { useLocation } from 'react-router-dom';
-import { search, ChangeTitle } from './utils/BasicFunctions';
-import { SearchFilled } from '@fluentui/react-icons';
-import { RiTelegram2Fill } from 'react-icons/ri';
-import { FaFacebookSquare, FaInstagram } from 'react-icons/fa';
-import styles from "./styles/Publication.module.css"
+import { ChangeTitle } from './utils/BasicFunctions';
+import styles from "./styles/Publication.module.css";
+import { useEffect, useRef, useState } from 'react';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { GetPublication } from './utils/api';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import { useTranslation } from 'react-i18next';
 
 function Publication() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
-  const page = queryParams.get('page');
+
+  const text = useRef<HTMLParagraphElement>(null);
+  const computerTag = useRef<HTMLAnchorElement>(null);
+  const linesTag = useRef<HTMLAnchorElement>(null);
+  const telecommunicationTag = useRef<HTMLAnchorElement>(null);
+  const datascienceTag = useRef<HTMLAnchorElement>(null);
+  const intellectTag = useRef<HTMLAnchorElement>(null);
+  const systemTag = useRef<HTMLAnchorElement>(null);
+  const iotTag = useRef<HTMLAnchorElement>(null);
+  const archTag = useRef<HTMLAnchorElement>(null);
+
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [t] = useTranslation();
+
+  async function loadPublication(): Promise<void> {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await GetPublication();
+      console.log("Fetched data:", data);
+      console.log("Current ID:", id);
+
+      if (
+        id &&
+        data[id] &&
+        text.current &&
+        computerTag.current &&
+        linesTag.current &&
+        telecommunicationTag.current &&
+        datascienceTag.current &&
+        intellectTag.current &&
+        systemTag.current &&
+        iotTag.current &&
+        archTag.current
+      ) {
+        text.current.textContent = data[id].text || "No text";
+
+        if (data[id].pdf) {
+          setPdfUrl("./assets/publications/" + data[id].pdf);
+        } else {
+          setPdfUrl(null);
+        }
+      } else {
+        setError("Publication not found!");
+        if (text.current) text.current.textContent = "Publication not found!";
+        setPdfUrl(null);
+      }
+    } catch (err) {
+      console.error('Load error:', err);
+      setError("Publication loading error");
+      if (text.current) text.current.textContent = "Publication loading error";
+      setPdfUrl(null);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   ChangeTitle("TUIT Bullet - Publication");
-  console.log("Loaded publication ID: " + id + " Page: " + page);
+
+  useEffect(() => {
+    if (id) {
+      loadPublication();
+    } else {
+      if (text.current) text.current.textContent = "ID публикации не указан.";
+      setPdfUrl(null);
+    }
+
+    // Очистка PDF URL при смене id
+    return () => {
+      // Если pdfUrl был создан через URL.createObjectURL, нужно revokeObjectURL,
+      // но если это просто строка URL, revokeObjectURL не нужен.
+      // Поэтому здесь просто сбрасываем состояние.
+      setPdfUrl(null);
+    };
+  }, [id]);
 
   return (
     <>
-      <div className="header">
-        <img src="https://picsum.photos/100" alt="Logo" />
-        <h1>
-          Bulletin of TUIT: Management and <br /> Communication Technologies
-        </h1>
-        <div className="header-right">
-          <a href="/sendpaper">SEND PAPER</a>
-          <a href="/sign-in">SIGN IN / SIGN OUT</a>
-        </div>
-      </div>
-      <div className="header-line"></div>
-
-      <div className="links">
-        <div className="links-left">
-          <a href="/">Main</a>
-          <a href="/publications">Publications</a>
-          <a href="/papers">Papers</a>
-          <a href="/requirements">Requirements</a>
-          <a href="/faq">FAQ</a>
-          <a href="/contacts">Contacts</a>
-        </div>
-        <div className="search">
-          <form onSubmit={search}>
-            <input
-              type="text"
-              className="searchinput"
-              name="q"
-              placeholder="search"
-            />
-            <button type="submit" className="searchbutton">
-              <SearchFilled />
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="header-line"></div>
+      <Header />
 
       <div className="content">
         <div className={styles.publicationbox}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid ex
-            similique amet sunt quae cumque placeat suscipit voluptatem expedita
-            deserunt odio at dolores veniam enim minima maiores officiis, earum
-            vero possimus eius optio, est voluptatum pariatur. Dolorem
-            necessitatibus alias odit. Necessitatibus facere doloribus placeat,
-            quam tenetur animi error dolorum natus asperiores laboriosam. Iusto
-            aliquid delectus ipsa enim dicta deleniti nesciunt illum maiores
-            voluptatibus eligendi corporis sed, cum neque reiciendis
-            consequatur. Lorem ipsum dolor sit, amet consectetur adipisicing
-            elit. Laboriosam ut placeat inventore laborum quasi dicta, eveniet
-            sequi nostrum! Praesentium maiores nesciunt autem adipisci? At,
-            magnam iure dicta minima maiores libero asperiores consectetur
+          <p ref={text}>
+            {loading ? "Загрузка публикации..." : error ? error : "Загрузка публикации..."}
           </p>
 
           <div style={{ display: "flex" }} className={styles.categories}>
-            <a href="/publications?category=computer">Computer</a>
-            <a href="/publications?category=lines">Lines</a>
-            <a href="/publications?category=telecomunication">
-              Telecomunication
-            </a>
-            <a href="/publications?category=datascience">Data science</a>
-            <a href="/publications?category=intellect">Intellect</a>
-            <a href="/publications?category=system">System</a>
-            <a href="/publications?category=iot">IOT</a>
-            <a href="/publications?category=computerarch">
-              Computer architecture
-            </a>
+            <a href="/publications?category=computer" ref={computerTag}>Computer</a>
+            <a href="/publications?category=lines" ref={linesTag}>Lines</a>
+            <a href="/publications?category=telecommunication" ref={telecommunicationTag}>Telecommunication</a>
+            <a href="/publications?category=datascience" ref={datascienceTag}>Data science</a>
+            <a href="/publications?category=intellect" ref={intellectTag}>Intellect</a>
+            <a href="/publications?category=system" ref={systemTag}>System</a>
+            <a href="/publications?category=iot" ref={iotTag}>IOT</a>
+            <a href="/publications?category=computerarch" ref={archTag}>Computer architecture</a>
           </div>
-          <button>DOWNLOAD ON PDF</button>
+
+          {/* Кнопка скачивания, если есть pdfUrl */}
+          {pdfUrl && (
+            <a href={pdfUrl} download>
+              <button>{t('publications.pdf')}</button>
+            </a>
+          )}
         </div>
-        {/*Тут типо появится пдф файл страницы*/}
-        <div className={styles.previouspagenext}>
-          <button>PREVIOUS</button>
-          <h3>PAGE {page}</h3>
-          <button>NEXT</button>
+
+        <div className={styles.pdf}>
+          {loading && <p>Загрузка PDF...</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {!loading && pdfUrl && (
+            <Worker workerUrl={`./pdf.worker.min.js`}>
+              <Viewer fileUrl={pdfUrl} />
+            </Worker>
+          )}
+          {!loading && !pdfUrl && !error && <p>PDF не доступен</p>}
         </div>
       </div>
 
-      <div className="footer">
-        <div className="footer-links">
-          <div className="footer-links-left">
-            <h1>MENU</h1>
-            <div>
-              <a href="/publications">Publications</a>
-            </div>
-            <div>
-              <a href="/papers">Papers</a>
-            </div>
-            <div>
-              <a href="/requirements">Requirements</a>
-            </div>
-            <div>
-              <a href="/faq">FAQ</a>
-            </div>
-            <div>
-              <a href="/contacts">Contacts</a>
-            </div>
-          </div>
-          <div className="footer-links-right">
-            <h1>ADRESS</h1>
-            <p>
-              Tashkent, Amir Temur street, <br /> 108 building
-            </p>
-            <h1>SOCIAL MEDIA</h1>
-            <div className="footer-icons">
-              <a href="https://t.me/@tuit">
-                <RiTelegram2Fill className="footer-icon" />
-              </a>
-              <a href="https://facebook.com/tuit">
-                <FaFacebookSquare className="footer-icon" />
-              </a>
-              <a href="https://instagram.com/tuit">
-                <FaInstagram className="footer-icon" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.3672880048543!2d69.57199217476885!3d41.474636371288945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aefcaa62ce469b%3A0x5b967b77a7db66c7!2z0YPQu9C40YbQsCDQkNC80LjRgNCwINCi0LXQvNGD0YDQsCAxMDgsIDExMTYwNiwg0KfQuNGA0YfQuNC6LCDQotCw0YjQutC10L3RgtGB0LrQsNGPINC-0LHQu9Cw0YHRgtGMLCDQo9C30LHQtdC60LjRgdGC0LDQvQ!5e0!3m2!1sru!2s!4v1747588578706!5m2!1sru!2s"
-          width="600"
-          height="450"
-          loading="lazy"
-          className="footer-maps"
-        ></iframe>
-        <div className="footer-footer">
-          <p>
-            © 2021 Bulletin of TUIT: Management and Communication Technologies |
-            All rights reserved!
-          </p>
-        </div>
-      </div>
+      <Footer />
     </>
   );
 }

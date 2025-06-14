@@ -1,11 +1,35 @@
 {
-  "one": "Requirement 1 description",
-  "two": "Requirement 2 description",
-  "three": "Requirement 3 description",
-  "four": "Requirement 4 description",
-  "five": "Requirement 5 description",
-  "six": "Requirement 6 description",
-  "seven": "Requirement 7 description",
-  "eight": "Requirement 8 description",
-  "nine": "Requirement 9 description"
+  "uz": {
+    "one": "Requirement 1 description UZ",
+    "two": "Requirement 2 description UZ",
+    "three": "Requirement 3 description UZ",
+    "four": "Requirement 4 description UZ",
+    "five": "Requirement 5 description UZ",
+    "six": "Requirement 6 description UZ",
+    "seven": "Requirement 7 description UZ",
+    "eight": "Requirement 8 description UZ",
+    "nine": "Requirement 9 description UZ"
+  },
+  "en": {
+    "one": "Requirement 1 description",
+    "two": "Requirement 2 description",
+    "three": "Requirement 3 description",
+    "four": "Requirement 4 description",
+    "five": "Requirement 5 description",
+    "six": "Requirement 6 description",
+    "seven": "Requirement 7 description",
+    "eight": "Requirement 8 description",
+    "nine": "Requirement 9 description"
+  },
+  "ru": {
+    "two": "Requirement 2 description RU",
+    "one": "Requirement 1 description RU",
+    "three": "Requirement 3 description RU",
+    "four": "Requirement 4 description RU",
+    "five": "Requirement 5 description RU",
+    "six": "Requirement 6 description RU",
+    "seven": "Requirement 7 description RU",
+    "eight": "Requirement 8 description RU",
+    "nine": "Requirement 9 description RU"
+  }
 }

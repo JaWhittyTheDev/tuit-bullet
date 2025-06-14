@@ -19,16 +19,14 @@
     margin-left: 300px;
     background-color: #f1f3f7;
     width: 1000px;
-    height: 700px;
 }
 
 .question {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+    background-color: transparent;
     width: 95%;
-    margin-top: 20px;
 }
 
 .questionheader {

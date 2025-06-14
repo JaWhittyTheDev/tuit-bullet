@@ -1,321 +1,247 @@
-import { ChangeTitle, search } from "./utils/BasicFunctions";
-import { SearchFilled } from "@fluentui/react-icons";
-import { RiTelegram2Fill } from "react-icons/ri";
-import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
+import { ChangeTitle } from "./utils/BasicFunctions";
 import { IoCalendarOutline, IoEyeOutline } from "react-icons/io5";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { PiUserSquare } from "react-icons/pi";
 import styles from "./styles/Paper.module.css"
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { useState, useEffect, useRef } from "react";
+import { GetPaper } from "./utils/api";
 
 function Paper() {
-    ChangeTitle("TUIT Bullet - Paper")
+  const downloadbutton1 = useRef<HTMLAnchorElement>(null);
+  const downloadbutton2 = useRef<HTMLAnchorElement>(null);
+  const downloadbutton3 = useRef<HTMLAnchorElement>(null);
+  const downloadbutton4 = useRef<HTMLAnchorElement>(null);
+  const downloadbutton5 = useRef<HTMLAnchorElement>(null);
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+  const [author, setAuthor] = useState('');
+  const [views, setViews] = useState(0);
+  const [reviews, setReviews] = useState(0);
+  const [content, setContent] = useState('');
+  const [keywords, setKeywords] = useState('');
+  const [review1author, setReview1author] = useState('');
+  const [review2author, setReview2author] = useState('');
+  const [review3author, setReview3author] = useState('');
+  const [review4author, setReview4author] = useState('');
+  const [review5author, setReview5author] = useState('');
+  const [review1job, setReview1job] = useState('');
+  const [review2job, setReview2job] = useState('');
+  const [review3job, setReview3job] = useState('');
+  const [review4job, setReview4job] = useState('');
+  const [review5job, setReview5job] = useState('');
+  const [article, setArticle] = useState('');
+  const [reference1title, setReference1title] = useState('');
+  const [reference1desc, setReference1desc] = useState('');
+  const [reference2title, setReference2title] = useState('');
+  const [reference2desc, setReference2desc] = useState('');
+  const [reference3title, setReference3title] = useState('');
+  const [reference3desc, setReference3desc] = useState('');
+  const [reference4title, setReference4title] = useState('');
+  const [reference4desc, setReference4desc] = useState('');
+  const [reference5title, setReference5title] = useState('');
+  const [reference5desc, setReference5desc] = useState('');
+  const [reference6title, setReference6title] = useState('');
+  const [reference6desc, setReference6desc] = useState('');
+  const [reference7title, setReference7title] = useState('');
+  const [reference7desc, setReference7desc] = useState('');
+  const [reference8title, setReference8title] = useState('');
+  const [reference8desc, setReference8desc] = useState('');
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get('id');
+
+  async function fetchPaperData() {
+    if (!id) {
+      alert("Paper ID is missing in the URL.");
+      return;
+    }
+    try {
+      const data = await GetPaper();
+      const paper = data[id];
+      if (paper) {
+        setTitle(paper.title || "Untitled");
+        setDate(paper.annotation.date || "Unknown Date");
+        setAuthor(paper.annotation.author || "Unknown Author");
+        setViews(paper.annotation.views || 0);
+        setReviews(paper.annotation.reviews || 0);
+        setContent(paper.annotation.content || "No content available.");
+        setKeywords(paper.annotation.keywords || "No keywords available.");
+        setReview1author(paper.reviews["1"].name || "Unknown Author");
+        setReview2author(paper.reviews["2"].name || "Unknown Author");
+        setReview3author(paper.reviews["3"].name || "Unknown Author");
+        setReview4author(paper.reviews["4"].name || "Unknown Author");
+        setReview5author(paper.reviews["5"].name || "Unknown Author");
+        setReview1job(paper.reviews["1"].job || "Unknown Job");
+        setReview2job(paper.reviews["2"].job || "Unknown Job");
+        setReview3job(paper.reviews["3"].job || "Unknown Job");
+        setReview4job(paper.reviews["4"].job || "Unknown Job");
+        setReview5job(paper.reviews["5"].job || "Unknown Job");
+        setArticle(paper.article || "No article content available.");
+        setReference1title(paper.references["1"].title || "Untitled");
+        setReference1desc(paper.references["1"].text || "No description available.");
+        setReference2title(paper.references["2"].title || "Untitled");
+        setReference2desc(paper.references["2"].text || "No description available.");
+        setReference3title(paper.references["3"].title || "Untitled");
+        setReference3desc(paper.references["3"].text || "No description available.");
+        setReference4title(paper.references["4"].title || "Untitled");
+        setReference4desc(paper.references["4"].text || "No description available.");
+        setReference5title(paper.references["5"].title || "Untitled");
+        setReference5desc(paper.references["5"].text || "No description available.");
+        setReference6title(paper.references["6"].title || "Untitled");
+        setReference6desc(paper.references["6"].text || "No description available.");
+        setReference7title(paper.references["7"].title || "Untitled");
+        setReference7desc(paper.references["7"].text || "No description available.");
+        setReference8title(paper.references["8"].title || "Untitled");
+        setReference8desc(paper.references["8"].text || "No description available.");
+        if (downloadbutton1.current && downloadbutton2.current && downloadbutton3.current && downloadbutton4.current && downloadbutton5.current) {
+          downloadbutton1.current.href = paper.reviews["1"].pdf || "#";
+          downloadbutton2.current.href = paper.reviews["2"].pdf || "#";
+          downloadbutton3.current.href = paper.reviews["3"].pdf || "#";
+          downloadbutton4.current.href = paper.reviews["4"].pdf || "#";
+          downloadbutton5.current.href = paper.reviews["5"].pdf || "#";
+        }
+      } else {
+        setTitle("Paper Not Found");
+      }
+    } catch (er) {
+      console.error("Error fetching paper data:", er);
+      setTitle("Paper Not Found");
+    }
+  }
+
+  useEffect(() => {
+    if (!id) {
+      setTitle("Paper Not Found");
+    } else {
+      fetchPaperData();
+    }
+  }, [id]);
+
+  ChangeTitle("TUIT Bullet - Paper");
     return (
       <>
-        <div className="header">
-          <img src="https://picsum.photos/100" alt="Logo" />
-          <h1>
-            Bulletin of TUIT: Management and <br /> Communication Technologies
-          </h1>
-          <div className="header-right">
-            <a href="/sendpaper">SEND PAPER</a>
-            <a href="/sign-in">SIGN IN / SIGN OUT</a>
-          </div>
-        </div>
-        <div className="header-line"></div>
-
-        <div className="links">
-          <div className="links-left">
-            <a href="/">Main</a>
-            <a href="/publications">Publications</a>
-            <a href="/papers">Papers</a>
-            <a href="/requirements">Requirements</a>
-            <a href="/faq">FAQ</a>
-            <a href="/contacts">Contacts</a>
-          </div>
-          <div className="search">
-            <form onSubmit={search}>
-              <input
-                type="text"
-                className="searchinput"
-                name="q"
-                placeholder="search"
-              />
-              <button type="submit" className="searchbutton">
-                <SearchFilled />
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <div className="header-line"></div>
+        <Header />
 
         <div className="content">
           <div className={styles.paperline}></div>
-          <h1 className={styles.papertitle}>Loading...</h1>
+          <h1 className={styles.papertitle}>{title}</h1>
           <div className={styles.paperblock1}>
             <div className={styles.annotation}>
               <h4>ANNOTAION</h4>
               <div className={styles.info}>
                 <p>
-                  <IoCalendarOutline /> 27.01.2018
+                  <IoCalendarOutline /> {date}
                 </p>
                 <p>
-                  <PiUserSquare /> SARVABEK AZIMOV
+                  <PiUserSquare /> {author}
                 </p>
                 <p>
-                  <IoEyeOutline /> 325
+                  <IoEyeOutline /> {views}
                 </p>
                 <p>
-                  <GiSettingsKnobs /> 8
+                  <GiSettingsKnobs /> {reviews}
                 </p>
               </div>
               <p className={styles.annotationtext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-                consequuntur laudantium tempora est in quos voluptas iusto? Unde
-                magnam earum eligendi repellendus a neque impedit voluptate ad
-                ea adipisci sapiente voluptatibus, molestias explicabo labore
-                soluta laudantium nulla consectetur asperiores. Optio nostrum
-                libero voluptate accusantium sint sed sequi qui accusamus iure
-                excepturi dignissimos quos, voluptates eveniet sit suscipit
-                commodi quaerat! Molestiae minus soluta distinctio labore eum
-                iusto. Assumenda consectetur impedit veritatis, consequatur iure
-                qui magni earum sit quibusdam explicabo est eveniet ex quidem
-                itaque! Hic fugiat cupiditate, repellendus laudantium error
-                natus adipisci magni quae, repudiandae accusantium reiciendis
-                est reprehenderit porro explicabo molestias quaerat sint
-                consequuntur expedita doloribus? Mollitia placeat qui eligendi
-                at asperiores? Veritatis, dolores ex. Exercitationem, voluptas
-                iure?
+                {content}
               </p>
               <p className={styles.keywords}>Keywords</p>
               <p className={styles.keywords2}>
-                Infastructure, Socio-technical systems
+                {keywords}
               </p>
             </div>
             <div className={styles.reviews}>
               <h4 className={styles.reviewstitle}>REVIEWS</h4>
-              <h4>SALIMOV SOLIJON</h4>
-              <p>Technical doctor, professor</p>
-              <h4>SALIMOV SOLIJON</h4>
-              <p>Technical doctor, professor</p>
-              <h4>SALIMOV SOLIJON</h4>
-              <p>Technical doctor, professor</p>
-              <h4>SALIMOV SOLIJON</h4>
-              <p>Technical doctor, professor</p>
-              <h4>SALIMOV SOLIJON</h4>
-              <p>Technical doctor, professor</p>
+              <h4>{review1author}</h4>
+              <p>{review1job}</p>
+              <h4>{review2author}</h4>
+              <p>{review2job}</p>
+              <h4>{review3author}</h4>
+              <p>{review3job}</p>
+              <h4>{review4author}</h4>
+              <p>{review4job}</p>
+              <h4>{review5author}</h4>
+              <p>{review5job}</p>
             </div>
             <div className={styles.pdfbuttons}>
-              <button>DOWNLOAD ON PDF</button>
-              <button>DOWNLOAD ON PDF</button>
-              <button>DOWNLOAD ON PDF</button>
-              <button>DOWNLOAD ON PDF</button>
-              <button>DOWNLOAD ON PDF</button>
+              <a download ref={downloadbutton1}><button>DOWNLOAD ON PDF</button></a>
+              <a download ref={downloadbutton2}><button>DOWNLOAD ON PDF</button></a>
+              <a download ref={downloadbutton3}><button>DOWNLOAD ON PDF</button></a>
+              <a download ref={downloadbutton4}><button>DOWNLOAD ON PDF</button></a>
+              <a download ref={downloadbutton5}><button>DOWNLOAD ON PDF</button></a>
             </div>
           </div>
           <div className={styles.paperblock2}>
             <div className={styles.article}>
               <h3>ARTICLE</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Maiores, iste aut. Nihil ratione at sint nulla consequatur
-                voluptates esse fugiat sapiente repellat numquam, nobis
-                architecto expedita similique, voluptate sed sit ducimus labore
-                velit quasi perferendis odio est minima iusto ullam! Nesciunt
-                maxime fugit explicabo dignissimos dolorem possimus incidunt
-                error veritatis eveniet totam, expedita officiis modi quod quasi
-                facere nobis provident aspernatur praesentium repellat,
-                temporibus voluptatem, odio libero nihil. Expedita iure ipsa
-                quisquam soluta aut fugit quia perspiciatis eius, accusamus nam
-                reiciendis cupiditate inventore, eum distinctio ab suscipit
-                exercitationem maiores repellendus velit ut cumque a delectus
-                illum. Maiores reiciendis sint distinctio fugit recusandae
-                inventore autem aliquid nobis, est, accusantium dolores
-                aspernatur cum illum? Accusantium dicta, aperiam aspernatur
-                doloremque vitae vel recusandae facere necessitatibus eius!
-                Expedita veritatis animi fuga ea excepturi, harum repudiandae
-                eum debitis atque dicta incidunt reiciendis corrupti error sunt
-                aspernatur hic veniam vitae voluptatibus. Hic tempora debitis
-                sit voluptatibus repudiandae consequatur, illum suscipit nobis
-                iure accusantium quisquam porro totam vitae. Modi ipsum vel
-                suscipit temporibus iure corporis voluptate explicabo. Id
-                nostrum itaque vel voluptas. Expedita dolore voluptas dolorum in
-                libero laboriosam sint quia neque quaerat accusantium, excepturi
-                qui non officiis tempore veniam recusandae ducimus autem facilis
-                mollitia vel ipsa!
+                {article}
               </p>
             </div>
             <div className={styles.references}>
               <h3>References</h3>
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference1title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference1desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference2title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference2desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference3title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference3desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference4title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference4desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference5title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference5desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference6title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference6desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference7title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference7desc}
               </p>
 
               <a href="/papers?id=12345678">
-                Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit.Obcaecati, ab?
+                {reference8title}
               </a>
               <p className={styles.referencetext}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Possimus provident delectus, vel similique eius ut repellat quis
-                earum cum obcaecati fugit laudantium qui nihil dolore enim quod
-                praesentium consequuntur maiores fugiat consectetur sit. Earum
-                unde doloribus qui voluptates deserunt eos mollitia consectetur,
-                temporibus assumenda sed praesentium omnis velit, voluptatem
-                accusamus!
+                {reference8desc}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="footer">
-          <div className="footer-links">
-            <div className="footer-links-left">
-              <h1>MENU</h1>
-              <div>
-                <a href="/publications">Publications</a>
-              </div>
-              <div>
-                <a href="/papers">Papers</a>
-              </div>
-              <div>
-                <a href="/requirements">Requirements</a>
-              </div>
-              <div>
-                <a href="/faq">FAQ</a>
-              </div>
-              <div>
-                <a href="/contacts">Contacts</a>
-              </div>
-            </div>
-            <div className="footer-links-right">
-              <h1>ADDRESS</h1>
-              <p>
-                Tashkent, Amir Temur street, <br /> 108 building
-              </p>
-              <h1>SOCIAL MEDIA</h1>
-              <div className="footer-icons">
-                <a href="https://t.me/@tuit">
-                  <RiTelegram2Fill className="footer-icon" />
-                </a>
-                <a href="https://facebook.com/tuit">
-                  <FaFacebookSquare className="footer-icon" />
-                </a>
-                <a href="https://instagram.com/tuit">
-                  <FaInstagram className="footer-icon" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.3672880048543!2d69.57199217476885!3d41.474636371288945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aefcaa62ce469b%3A0x5b967b77a7db66c7!2z0YPQu9C40YbQsCDQkNC80LjRgNCwINCi0LXQvNGD0YDQsCAxMDgsIDExMTYwNiwg0KfQuNGA0YfQuNC6LCDQotCw0YjQutC10L3RgtGB0LrQsNGPINC-0LHQu9Cw0YHRgtGMLCDQo9C30LHQtdC60LjRgdGC0LDQvQ!5e0!3m2!1sru!2s!4v1747588578706!5m2!1sru!2s"
-            width="600"
-            height="450"
-            loading="lazy"
-            className="footer-maps"
-          ></iframe>
-          <div className="footer-footer">
-            <p>
-              © 2021 Bulletin of TUIT: Management and Communication Technologies
-              | All rights reserved!
-            </p>
-          </div>
-        </div>
+        <Footer />
       </>
     );
 }

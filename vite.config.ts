@@ -21,6 +21,14 @@ export default defineConfig(({ mode }) => ({
   ],
   server: {
     host: true,
-    allowedHosts: ['localhost', '373e-81-26-204-133.ngrok-free.app'],
+    allowedHosts: ['localhost'],
+  },
+  build: {
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   },
 }));

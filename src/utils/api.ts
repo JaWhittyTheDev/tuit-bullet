@@ -2,7 +2,7 @@ import axios from "axios";
 import type { RefObject } from "react";
 
 export function getLatestPublication() {
-  return axios.get('http://localhost:5000/api/latest-publication') // Впишите тут URL бэкенда
+  return axios.get('http://localhost:5000/api/latest-publication')
     .then(response => response.data)
     .catch(error => {
       console.error('Error: ', error, ' try again later.');
@@ -20,28 +20,6 @@ export function getLastPaper() {
   .then (response => response.data)
 }
 
-export function register(first_name: RefObject<HTMLInputElement>, last_name: RefObject<HTMLInputElement>, date: RefObject<HTMLInputElement>, email: RefObject<HTMLInputElement>, organization: RefObject<HTMLInputElement>, login: RefObject<HTMLInputElement>, password: RefObject<HTMLInputElement>, scientific_degree: RefObject<HTMLInputElement>, another_information: RefObject<HTMLInputElement>, avatarurl: string, errorsRef: RefObject<HTMLParagraphElement>) {
-  if (first_name.current && last_name.current && date.current && email.current && organization.current && login.current && password.current && scientific_degree.current && another_information.current) {
-    return axios.post('http://localhost:5000/api/register', {
-      "firstname": first_name.current.value,
-      "last_name": last_name.current.value,
-      "date": date.current.value,
-      "email": email.current.value,
-      "organization": organization.current.value,
-      "login": login.current.value,
-      "password": password.current.value,
-      "scientificdegree": scientific_degree.current.value,
-      "anotherinformation": another_information.current.value,
-      "avatarurl": avatarurl
-    })
-    .then (response => {
-      if (errorsRef.current) {
-        errorsRef.current.textContent = response.data;
-      }
-    })
-  }
-}
-
 export function Publications() {
   return axios.get('http://localhost:5000/api/publications')
     .then(response => response.data)
@@ -50,3 +28,61 @@ export function Publications() {
       throw error;
     });
 }
+
+export function Papers() {
+  return axios.get('http://localhost:5000/api/papers')
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error: ', error, ' try again later.');
+      throw error;
+    });
+}
+
+export function GetPublication() {
+  return axios.get('http://localhost:5000/api/publication')
+    .then(response => response.data)
+}
+
+export async function GetPaper() {
+  const { data } = await axios.get('http://localhost:5000/api/paper');
+  return data;
+}
+
+export function SendContactsData(
+  firstname: RefObject<HTMLInputElement>,
+  email: RefObject<HTMLInputElement>,
+  message: RefObject<HTMLTextAreaElement>
+) {
+  if (firstname.current && email.current && message.current) {
+    return axios.post('http://localhost:5000/api/contacts', {
+      firstname: firstname.current.value,
+      email: email.current.value,
+      message: message.current.value
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(error => {
+      console.error('POST request failed:', error);
+      throw error;
+    });
+  } else {
+    console.error("Missing arguments!");
+    return Promise.reject("One or more input references are missing.");
+  }
+}
+
+export const register = async (formData: FormData): Promise<string> => {
+  try {
+    const response = await axios.post("http://localhost:5000/api/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data.message;
+  } catch (error: any) {
+    console.error("Error when uploading: ", error);
+    throw error.response?.data?.message || error.message || "Unknown error";
+  }
+};

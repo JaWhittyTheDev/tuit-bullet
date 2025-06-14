@@ -7,6 +7,10 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.hidden {
+  display: none;
+}
+
 input {
   font-style: italic;
 }
@@ -465,5 +469,5 @@ input {
   background-color: #24374A;
   transform: translateY(-111px);
   width: 100%;
-  margin-top: 190px;
+  margin-top: 150px;
 }
