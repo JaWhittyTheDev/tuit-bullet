@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import reqslist from './json/requirements.json' with { type: 'json' };
 import styles from './styles/Requirements.module.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
