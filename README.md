@@ -2,7 +2,7 @@
 **You need:**
 - git
 - Node.js 22+
-- Python v3.12.10 (для тестового бэкенда)
+- Python v3.12.10 (for backend test)
 To run:
 ```bash
 git clone https://github.com/jawhittythedev/tuit-bullet
@@ -17,4 +17,5 @@ To build:
 ```bash
 # Install project and run to test 👆
 npm run build -- --logLevel silent
+# and project will build in /dist
 ```
