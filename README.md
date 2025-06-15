@@ -2,7 +2,7 @@
 **You need:**
 - git
 - Node.js 22+
-- Python v3.12.10 (для тестового бэкенда)
+- Python v3.12.10 (for test backend)
 To run:
 ```bash
 git clone https://github.com/jawhittythedev/tuit-bullet
